@@ -1,9 +1,6 @@
 import random
 import numpy as np
-# import time
 import matplotlib.pyplot as plt
-
-# startTime = time.time()
 
 averageRRR = 10  # between 0 and 1000 included, float
 winrate = 20  # between 0 and 100 excluded, float
@@ -15,7 +12,7 @@ numberOfTradesToDetermineRisk = 10000
 numberOfIterationsToDetermineRisk = 100
 
 
-# First iteration to determine how much to risk relative to the max drawdown
+# Iterations to determine how much to risk relative to the max drawdown wanted
 maxDrawdownEncountered = 0
 
 for n in range(numberOfIterationsToDetermineRisk):
@@ -69,7 +66,6 @@ for n in range(numberOfIterationsToDetermineRisk):
 
 risk = ((maxDrawdownWanted)/ (maxDrawdownEncountered * 100))/100
 # print(f"Max drawdown from all the iterations : {maxDrawdownEncountered}")
-# print(f"Risk recommended : {round(risk*100, 2)}%")
 
 # Last iteration in which we simulate the equity growth with the new found recommended risk
 
@@ -95,7 +91,7 @@ for index in range(1, numberOfMonthsToIterate*numberOfTradesPerMonth):
 
     balances[index] = new_balance
 
-#plot (we can also transform the array into a pandas dataframe then plot)
+#plot 
 x = np.zeros(numberOfMonthsToIterate*numberOfTradesPerMonth)
 for index in range(1,numberOfMonthsToIterate*numberOfTradesPerMonth):
     x[index] = index
@@ -106,8 +102,4 @@ plt.title(f"Balance (recommended risk : {round(risk*100, 2)}%)")
 plt.xlabel("Number of trades")
 plt.ylabel("Dollars")
 plt.plot(x, balances, color = color)
-
-# elapsed_time = time.time() - startTime
-# print(f"Time taken : {elapsed_time//60}min {elapsed_time%60}s")
-
 plt.show()
